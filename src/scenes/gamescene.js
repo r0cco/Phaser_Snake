@@ -1,12 +1,12 @@
 import "phaser";
-import Food_image from './assets/food.png';
-import Body from './assets/body.png';
+import Food from '../assets/food.png';
+import Body from '../assets/body.png';
 
 var snake;
 var food;
 var cursors;
 
-var ctx = new AudioContext();
+//var ctx = new AudioContext();
 
 //  Direction consts
 var UP = 0;
@@ -20,7 +20,7 @@ export default class Gamescene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image("food", Food_image);
+        this.load.image("food", Food);
         this.load.image("body", Body);
     }
 
@@ -58,7 +58,7 @@ export default class Gamescene extends Phaser.Scene {
             eat: function () {
                 this.total++;
 
-                new Phaser.Sound.Dynamic.FX(ctx, this.eatEffect);
+                //new Phaser.Sound.Dynamic.FX(ctx, this.eatEffect);
             }
 
         });
@@ -161,7 +161,7 @@ export default class Gamescene extends Phaser.Scene {
                     console.log('dead');
 
                     //  Game Over
-                    new Phaser.Sound.Dynamic.FX(ctx, this.deathEffect);
+                    //new Phaser.Sound.Dynamic.FX(ctx, this.deathEffect);
 
                     this.alive = false;
 
@@ -223,7 +223,7 @@ export default class Gamescene extends Phaser.Scene {
         cursors = this.input.keyboard.createCursorKeys();
     }
 
-    update() {
+    update(time, delta) {
         if (!snake.alive) {
             return;
         }
